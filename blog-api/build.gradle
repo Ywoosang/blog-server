@@ -6,7 +6,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
-// Spring Boot 실행 가능 JAR 파일
-bootJar {
-    enabled = true
+// 일반 jar 파일 생성 비활성화
+jar {
+    enabled = false
 }
