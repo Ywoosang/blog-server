@@ -1,13 +1,12 @@
-package com.ywoosang.tech.api;
+package com.ywoosang.tech;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BlogServerApplication {
+public class BlogApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BlogServerApplication.class, args);
+		SpringApplication.run(BlogApiApplication.class, args);
 	}
-
 }

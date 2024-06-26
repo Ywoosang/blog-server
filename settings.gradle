@@ -1,1 +1,3 @@
 rootProject.name = 'blog-server'
+include 'blog-api', 'blog-common', 'blog-domain', 'blog-infra'
+

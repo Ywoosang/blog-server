@@ -4,42 +4,63 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.5'
 }
 
-group = 'com.ywoosang.tech.api'
-version = '0.0.1-SNAPSHOT'
+// 전체 프로젝트에 적용될 설정
+allprojects {
+	group = 'com.ywoosang.tech'
+	version = '1.0.0'
+	// 컴파일시 Java 17 문법을 사용
+	sourceCompatibility = '17'
+	// 생성된 바이트코드가 Java 17 과 호환
+	targetCompatibility = '17'
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+	repositories {
+		mavenCentral()
 	}
 }
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
+// 모듈 각각
+subprojects {
+	// java 컴파일과 관련된 설정
+	apply plugin: 'java'
+	// spring boot 관련 설정 (bootJar 태스크 정의, 빌드 관련 기능)
+	apply plugin: 'org.springframework.boot'
+	// 의존성 관리를 자동으로 처리
+	apply plugin: 'io.spring.dependency-management'
+
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	// 빌드 환경에서 JDK 17 을 이용
+	java {
+		toolchain {
+			languageVersion = JavaLanguageVersion.of(17)
+		}
+	}
+
+	// 서브 프로젝트들이 이용할 공통적인 의존성을 정의
+	dependencies {
+		// lombok
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+		// test
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	// 모든 테스트가 Junit 플랫폼에서 실행되도록 구성
+	tasks.named('test') {
+		useJUnitPlatform()
 	}
 }
 
-repositories {
-	mavenCentral()
+// 루트 프로젝트에서만 Spring Boot 실행 가능 JAR 파일을 비활성화
+if(project == rootProject) {
+	bootJar {
+		enabled = false
+	}
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
 
-tasks.named('test') {
-	useJUnitPlatform()
-}

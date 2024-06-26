@@ -1,0 +1,12 @@
+dependencies {
+    implementation project(":blog-domain")
+    implementation project(":blog-common")
+    implementation project(":blog-infra")
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+// Spring Boot 실행 가능 JAR 파일
+bootJar {
+    enabled = true
+}
