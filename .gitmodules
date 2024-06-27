@@ -1,0 +1,3 @@
+[submodule "blog-config"]
+	path = blog-config
+	url = git@github.com:Ywoosang/blog-config.git
