@@ -2,6 +2,14 @@ dependencies {
 
 }
 
+tasks.register('copyConfig', Copy) {
+    from '../blog-config/blog-domain/'
+    include "application*.yml"
+    into 'src/main/resources'
+}
+
+processResources.dependsOn('copyConfig')
+
 bootJar {
     enabled = false
 }

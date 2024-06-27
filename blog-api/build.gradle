@@ -6,6 +6,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
+tasks.register('copyConfig', Copy) {
+    from '../blog-config/blog-api/'
+    include "application*.yml"
+    into 'src/main/resources'
+}
+
+processResources.dependsOn('copyConfig')
+
 // 일반 jar 파일 생성 비활성화
 jar {
     enabled = false
