@@ -1,0 +1,11 @@
+FROM openjdk:17
+
+WORKDIR /app
+
+EXPOSE 8080
+
+ARG JAR_FILE=blog-api/build/libs/*.jar
+
+COPY ${JAR_FILE} blog-server.jar
+
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=dev", "-Duser.timezone=Asia/Seoul", "blog-server.jar"]
