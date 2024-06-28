@@ -38,3 +38,9 @@ out/
 
 ### yml
 /*/**/resources/*.yml
+
+### postgres volum
+db_data/
+
+### .env
+.env
