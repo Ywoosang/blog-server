@@ -34,8 +34,9 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_posts_members"))
     private Member member;
 
+
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_posts_categories"))
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "fk_posts_categories"))
     private Category category;
 
     @Column(nullable = false, length = 255)
