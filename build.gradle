@@ -21,7 +21,7 @@ allprojects {
 // 모듈 각각
 subprojects {
 	// java 컴파일과 관련된 설정
-	apply plugin: 'java'
+	apply plugin: 'java-library'
 	// spring boot 관련 설정 (bootJar 태스크 정의, 빌드 관련 기능)
 	apply plugin: 'org.springframework.boot'
 	// 의존성 관리를 자동으로 처리
@@ -55,6 +55,7 @@ subprojects {
 		useJUnitPlatform()
 	}
 }
+
 
 // 루트 프로젝트에서만 Spring Boot 실행 가능 JAR 파일을 비활성화
 if(project == rootProject) {
