@@ -12,6 +12,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: ${{ secrets.PG_DB_NAME }}
+          POSTGRES_USER: ${{ secrets.PG_DB_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.PG_DB_PASSWORD }}
+
     steps:
       - name: 리포지토리 checkout
         uses: actions/checkout@v3
@@ -29,6 +39,6 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: 빌드 및 테스트
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: build test
