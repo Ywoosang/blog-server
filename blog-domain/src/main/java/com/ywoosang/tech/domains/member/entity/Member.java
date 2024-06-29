@@ -25,10 +25,10 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "members",
         indexes = {
-                @Index(name = "ix-members-email", columnList = "email")
+                @Index(name = "ix_members_email", columnList = "email")
         },
         uniqueConstraints = {
-                @UniqueConstraint(name = "uc-members-email", columnNames = "email")
+                @UniqueConstraint(name = "uc_members_email", columnNames = "email")
         }
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

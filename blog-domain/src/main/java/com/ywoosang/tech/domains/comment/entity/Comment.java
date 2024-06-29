@@ -9,14 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Entity
 @Table(name = "comments", indexes = {
-        @Index(name = "ix-comments-post_id", columnList = "post_id"),
-        @Index(name = "ix-comments-user_id", columnList = "user_id"),
-        @Index(name = "ix-comments-nickname", columnList = "nickname")
+        @Index(name = "ix_comments_post_id", columnList = "post_id"),
+        @Index(name = "ix_comments_user_id", columnList = "user_id"),
+        @Index(name = "ix_comments_nickname", columnList = "nickname")
 })
 @Getter
 @Setter
@@ -28,12 +27,12 @@ public class Comment extends BaseEntity {
     private Long commentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false, foreignKey = @ForeignKey(name = "fk-comments-posts"))
+    @JoinColumn(name = "post_id", nullable = false, foreignKey = @ForeignKey(name = "fk_comments_posts"))
     private Post post;
 
     // 답글이 아닐 수도 있으므로 null 허용
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_comment_id", foreignKey = @ForeignKey(name = "fk-comments-comments"))
+    @JoinColumn(name = "parent_comment_id", foreignKey = @ForeignKey(name = "fk_comments_comments"))
     private Comment parentComment;
 
     // 부모 댓글이 삭제되었을 때 orphanRemoval = true 로 자식 댓글도 함께 삭제
@@ -42,7 +41,7 @@ public class Comment extends BaseEntity {
 
     // 회원 또는 비회원 댓글 생성이 가능해야 하므로 null 허용
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk-comments-members"))
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_comments_members"))
     private Member member;
 
     @Column(length = 50)

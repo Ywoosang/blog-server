@@ -16,12 +16,12 @@ import java.util.ArrayList;
 @Entity
 @Getter
 @Table(name = "posts", indexes = {
-        @Index(name = "ix-posts-user_id", columnList = "user_id"),
-        @Index(name = "ix-posts-category_id", columnList = "category_id"),
-        @Index(name = "ix-posts-title", columnList = "title"),
-        @Index(name = "ix-posts-slug", columnList = "slug")
+        @Index(name = "ix_posts_user_id", columnList = "user_id"),
+        @Index(name = "ix_posts_category_id", columnList = "category_id"),
+        @Index(name = "ix_posts_title", columnList = "title"),
+        @Index(name = "ix_posts_slug", columnList = "slug")
 }, uniqueConstraints = {
-        @UniqueConstraint(name = "uc-posts-slug", columnNames = "slug")
+        @UniqueConstraint(name = "uc_posts_slug", columnNames = "slug")
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseEntity {
@@ -31,11 +31,11 @@ public class Post extends BaseEntity {
     private Long postId;
 
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk-posts-members"))
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_posts_members"))
     private Member member;
 
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk-posts-categories"))
+    @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_posts_categories"))
     private Category category;
 
     @Column(nullable = false, length = 255)

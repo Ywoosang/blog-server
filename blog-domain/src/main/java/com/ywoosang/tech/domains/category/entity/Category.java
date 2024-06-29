@@ -9,15 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Entity
 @Table(name = "categories", uniqueConstraints = {
-        @UniqueConstraint(name = "uc-categories-name", columnNames = "name"),
-        @UniqueConstraint(name = "uc-categories-slug", columnNames = "slug")
+        @UniqueConstraint(name = "uc_categories_name", columnNames = "name"),
+        @UniqueConstraint(name = "uc_categories_slug", columnNames = "slug")
 }, indexes = {
-        @Index(name = "ix-categories-slug", columnList = "slug")
+        @Index(name = "ix_categories_slug", columnList = "slug")
 })
 @Getter
 @Setter
