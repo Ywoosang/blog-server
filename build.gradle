@@ -46,9 +46,8 @@ subprojects {
 		// lombok
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
-		// test
+		// spring boot test
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
-		testImplementation 'org.assertj:assertj-core'
 	}
 
 	// 모든 테스트가 Junit 플랫폼에서 실행되도록 구성
