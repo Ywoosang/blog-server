@@ -71,4 +71,12 @@ public class Post extends BaseEntity {
             category.getPosts().add(this);
         }
     }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
 }
