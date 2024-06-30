@@ -9,6 +9,8 @@ dependencies {
 
     // mysql
     implementation 'org.postgresql:postgresql:42.7.3'
+    // h2
+    runtimeOnly 'com.h2database:h2'
 }
 
 processResources.dependsOn('copyConfig')
