@@ -37,6 +37,9 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(nullable = false, length = 20)
+    private String nickname;
+
     @Column(nullable = false, length = 255)
     private String email;
 
@@ -48,8 +51,9 @@ public class Member extends BaseEntity {
     private LocalDateTime deletedAt;
 
     @Builder
-    public Member(Long userId, String email, MemberRole role) {
+    public Member(Long userId, String nickname, String email, MemberRole role) {
         this.userId = userId;
+        this.nickname = nickname;
         this.email = email;
         this.role = role;
     }
