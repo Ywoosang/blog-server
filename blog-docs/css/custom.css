@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #fafafa;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 버전 표시 */
+.details {
+}
+
+
+/* 업데이트 표시 */
+.last-update p{
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    color: gray;
+    font-size: 14px;
+}
+
+
+
+h1 {
+    padding-bottom: 10px;
+    /*border-bottom: 1px solid #e7e7e9;*/
+}
+
+
+
+/* 목차 */
+#toctitle {
+    color: #050404;
+    font-size: 1.5rem !important;
+    font-weight: 700;
+}
+
+#toc {
+    background-color: #ffffff !important;
+    color: #000000;
+    padding: 0.3rem 1rem 0.3rem 1rem;
+    margin-top: 1.5rem;
+}
+
+
+#toc a {
+    color: #535353;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+#toc a:hover {
+    text-decoration: underline;
+}
+
+ul.sectlevel1 a {
+    font-weight: 500 !important;
+}
+
+
+/* 본문 헤더 스타일 */
+h1, h2, h3, h4, h5, h6 {
+    color: #3c3c3c;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+h2 {
+    font-weight: 500;
+}
+
+h3, h4 {
+    font-weight: 400;
+}
+
+
+/* 코드 블록 스타일 */
+pre.highlightjs {
+    background: #2d2d2d !important;
+    padding: 15px;
+    overflow: auto;
+    white-space: pre;
+    border-radius: 8px;
+}
+
+code.hljs {
+    background: #2d2d2d !important;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #dcdcdc;
+}
+
+.hljs-keyword {
+    color: #cc99cd;
+}
+
+.hljs-string {
+    color: #7ec699;
+}
+
+.hljs-attribute {
+    color: #f99157;
+}
+
+@media screen and (min-width: 1280px) {
+    #toctitle {
+        font-size: 2rem !important;
+    }
+}
+@media screen and (min-width: 768px) {
+    #toctitle {
+        font-size: 1.7rem !important;
+    }
+
+}
+
+
+
+

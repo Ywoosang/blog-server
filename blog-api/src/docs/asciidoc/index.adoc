@@ -1,0 +1,43 @@
+= 윤우상 블로그 API DOCS
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:docinfo: shared-head
+:toc-title: 목차
+:nofooter:
+
+== Test Endpoint
+
+include::test.adoc[]
+
+
+== User Endpoints
+
+=== Auth
+include::member/auth.adoc[]
+
+=== Post
+include::member/post.adoc[]
+
+=== Category
+include::member/category.adoc[]
+
+=== Member
+include::member/member.adoc[]
+
+
+== Admin Endpoints
+
+=== Post
+include::admin/post-admin.adoc[]
+
+=== Category
+include::admin/category-admin.adoc[]
+
+=== Member
+include::admin/member-admin.adoc[]
+
+
+
