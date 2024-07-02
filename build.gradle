@@ -7,7 +7,7 @@ plugins {
 // 전체 프로젝트에 적용될 설정
 allprojects {
 	group = 'com.ywoosang.tech'
-	version = '1.0.0'
+	version = '1.0.0-alpha'
 	// 컴파일시 Java 17 문법을 사용
 	sourceCompatibility = '17'
 	// 생성된 바이트코드가 Java 17 과 호환

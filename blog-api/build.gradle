@@ -1,18 +1,94 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+plugins {
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+}
+
+configurations {
+    asciidoctorExt
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 dependencies {
     implementation project(":blog-domain")
     implementation project(":blog-common")
     implementation project(":blog-infra")
 
+    // spring
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Spring Rest Docs
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    // lombok (test)
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    // h2 db
+    runtimeOnly 'com.h2database:h2'
+
+    //test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'com.h2database:h2'
 }
 
+ext {
+    // 테스트로 스니펫이 생성될 디렉토리
+    snippetsDir = file('build/generated-snippets')
+    // 스니펫을 이용해 html 을 생성할 디렉토리
+    docsDir = file('build/docs/asciidoc')
+}
+
+
+test {
+    // build/generated-snippets 위치에 snippet 보관
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+// asciidoctor 작업 구성
+asciidoctor {
+    configurations 'asciidoctorExt'
+    baseDirFollowsSourceFile()
+    inputs.dir snippetsDir
+
+    def version = project.version
+    def updateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
+    attributes 'revnumber': version, 'revdate': updateTime
+
+    dependsOn test
+}
+
+// blog-docs 에 html 복사
+tasks.register('createDocument', Copy) {
+    dependsOn asciidoctor
+    from docsDir
+    into file("$rootDir/blog-docs")
+}
+
+
+// application*.yml 설정파일 복사
 tasks.register('copyConfig', Copy) {
     from '../blog-config/blog-api/'
     include "application*.yml"
     into 'src/main/resources'
 }
 
+
+
 processResources.dependsOn('copyConfig')
+
+bootJar {
+    dependsOn createDocument
+}
 
 // 일반 jar 파일 생성 비활성화
 jar {
