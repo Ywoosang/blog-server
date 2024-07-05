@@ -1,0 +1,62 @@
+=== Authentication Errors
+
+[cols="1,1,4", options="header"]
+|===
+| Code | HTTP Status | Message
+| AUTH-001 | 401 Unauthorized | 사용자 인증에 실패했습니다.
+| AUTH-002 | 403 Forbidden | 접근이 거부되었습니다. 이 리소스에 대한 권한이 없습니다.
+| AUTH-003 | 403 Forbidden | 작업을 수행할 권한이 부족합니다.
+| AUTH-004 | 401 Unauthorized | 로그인에 실패했습니다.
+| AUTH-005 | 401 Unauthorized | 토큰의 유효기간이 만료되었습니다.
+| AUTH-006 | 400 Bad Request | 잘못된 토큰 형식입니다.
+|===
+
+=== Category Errors
+
+[cols="1,1,4", options="header"]
+|===
+| Code | HTTP Status | Message
+| CATE-001 | 404 Not Found | 해당 카테고리를 찾을 수 없습니다.
+| CATE-002 | 400 Bad Request | 카테고리 정보가 잘못되었습니다. 다시 확인해주세요.
+| CATE-003 | 409 Conflict | 이미 존재하는 카테고리입니다.
+| CATE-004 | 400 Bad Request | 카테고리 이름 길이가 허용 범위를 초과했습니다.
+|===
+
+=== Post Errors
+
+[cols="1,1,4", options="header"]
+|===
+| Code | HTTP Status | Message
+| POST-001 | 404 Not Found | 해당 게시물을 찾을 수 없습니다.
+| POST-002 | 400 Bad Request | 게시물 정보가 잘못되었습니다. 다시 확인해주세요.
+| POST-003 | 409 Conflict | 이미 존재하는 게시물입니다.
+|===
+
+=== User Errors
+
+[cols="1,1,4", options="header"]
+|===
+| Code | HTTP Status | Message
+| USER-001 | 400 Bad Request | 입력한 사용자 정보를 확인해주세요.
+| USER-002 | 404 Not Found | 해당 사용자를 찾을 수 없습니다.
+| USER-003 | 409 Conflict | 이미 존재하는 사용자입니다.
+| USER-004 | 409 Conflict | 이미 존재하는 닉네임입니다.
+|===
+
+=== Common Errors
+
+[cols="1,1,4", options="header"]
+|===
+| Code | HTTP Status | Message
+| SYS-001 | 500 Internal Server Error | 서버 내부 오류가 발생했습니다. 다시 시도해주세요.
+| SYS-002 | 503 Service Unavailable | 현재 서비스 이용이 불가능합니다. 나중에 다시 시도해주세요.
+| SYS-003 | 504 Gateway Timeout | 요청 시간이 초과되었습니다. 다시 시도해주세요.
+| CLIENT-001 | 400 Bad Request | 잘못된 요청입니다. 요청 내용을 다시 확인해주세요.
+| CLIENT-002 | 401 Unauthorized | 인증이 필요합니다. 인증 정보를 제공해주세요.
+| CLIENT-003 | 403 Forbidden | 접근이 거부되었습니다. 권한을 확인해주세요.
+| CLIENT-004 | 404 Not Found | 요청한 리소스를 찾을 수 없습니다.
+| CLIENT-005 | 405 Method Not Allowed | 허용되지 않은 메서드입니다. 요청 방식을 확인해주세요.
+| CLIENT-006 | 406 Not Acceptable | 요청한 리소스가 허용되지 않는 형식입니다.
+| CLIENT-007 | 415 Unsupported Media Type | 지원되지 않는 미디어 형식입니다.
+| CLIENT-008 | 429 Too Many Requests | 요청이 너무 많습니다. 잠시 후 다시 시도해주세요.
+|===

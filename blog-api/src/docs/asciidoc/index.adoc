@@ -8,12 +8,16 @@
 :toc-title: 목차
 :nofooter:
 
-== Test Endpoint
+== 에러코드
+
+include::error-code.adoc[]
+
+== 테스트 엔드포인트
 
 include::test.adoc[]
 
 
-== User Endpoints
+== 사용자 엔드포인트
 
 === Auth
 include::member/auth.adoc[]
@@ -28,7 +32,7 @@ include::member/category.adoc[]
 include::member/member.adoc[]
 
 
-== Admin Endpoints
+== 관리자 엔드포인트
 
 === Post
 include::admin/post-admin.adoc[]

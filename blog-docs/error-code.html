@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.18">
-<title>포스트 조회</title>
+<title>Authentication Errors</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,15 +440,246 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 </div>
 <div id="content">
-<div class="sect3">
-<h4 id="_포스트_조회">포스트 조회</h4>
-
+<div class="sect2">
+<h3 id="_authentication_errors">Authentication Errors</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">HTTP Status</th>
+<th class="tableblock halign-left valign-top">Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH-001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자 인증에 실패했습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH-002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403 Forbidden</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">접근이 거부되었습니다. 이 리소스에 대한 권한이 없습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH-003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403 Forbidden</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">작업을 수행할 권한이 부족합니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH-004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로그인에 실패했습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH-005</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰의 유효기간이 만료되었습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH-006</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">잘못된 토큰 형식입니다.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_category_errors">Category Errors</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">HTTP Status</th>
+<th class="tableblock halign-left valign-top">Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CATE-001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404 Not Found</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">해당 카테고리를 찾을 수 없습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CATE-002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">카테고리 정보가 잘못되었습니다. 다시 확인해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CATE-003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409 Conflict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미 존재하는 카테고리입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CATE-004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">카테고리 이름 길이가 허용 범위를 초과했습니다.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_post_errors">Post Errors</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">HTTP Status</th>
+<th class="tableblock halign-left valign-top">Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST-001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404 Not Found</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">해당 게시물을 찾을 수 없습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST-002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시물 정보가 잘못되었습니다. 다시 확인해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST-003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409 Conflict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미 존재하는 게시물입니다.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_user_errors">User Errors</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">HTTP Status</th>
+<th class="tableblock halign-left valign-top">Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER-001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">입력한 사용자 정보를 확인해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER-002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404 Not Found</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">해당 사용자를 찾을 수 없습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER-003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409 Conflict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미 존재하는 사용자입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USER-004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409 Conflict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미 존재하는 닉네임입니다.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_common_errors">Common Errors</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">HTTP Status</th>
+<th class="tableblock halign-left valign-top">Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SYS-001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">500 Internal Server Error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">서버 내부 오류가 발생했습니다. 다시 시도해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SYS-002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">503 Service Unavailable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">현재 서비스 이용이 불가능합니다. 나중에 다시 시도해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SYS-003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">504 Gateway Timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 시간이 초과되었습니다. 다시 시도해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIENT-001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">잘못된 요청입니다. 요청 내용을 다시 확인해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIENT-002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">인증이 필요합니다. 인증 정보를 제공해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIENT-003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403 Forbidden</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">접근이 거부되었습니다. 권한을 확인해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIENT-004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404 Not Found</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청한 리소스를 찾을 수 없습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIENT-005</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">405 Method Not Allowed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">허용되지 않은 메서드입니다. 요청 방식을 확인해주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIENT-006</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">406 Not Acceptable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청한 리소스가 허용되지 않는 형식입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIENT-007</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">415 Unsupported Media Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지원되지 않는 미디어 형식입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIENT-008</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">429 Too Many Requests</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청이 너무 많습니다. 잠시 후 다시 시도해주세요.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-alpha<br>
-Last updated 2024-07-02 17:01:34 +0900
+Last updated 2024-07-05 09:55:18 +0900
 </div>
 </div>
 </body>
