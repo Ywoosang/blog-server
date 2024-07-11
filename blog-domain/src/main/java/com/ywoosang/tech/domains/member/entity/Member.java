@@ -35,13 +35,15 @@ import java.time.LocalDateTime;
 public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long memberId;
 
     @Column(nullable = false, length = 20)
     private String nickname;
 
     @Column(nullable = false, length = 255)
     private String email;
+
+    private String profileImage;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
@@ -51,10 +53,11 @@ public class Member extends BaseEntity {
     private LocalDateTime deletedAt;
 
     @Builder
-    public Member(Long userId, String nickname, String email, MemberRole role) {
-        this.userId = userId;
+    public Member(Long memberId, String nickname, String email, String profileImage, MemberRole role) {
+        this.memberId = memberId;
         this.nickname = nickname;
         this.email = email;
+        this.profileImage = profileImage;
         this.role = role;
     }
 
