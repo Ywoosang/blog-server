@@ -20,7 +20,7 @@ public class CookieUtil {
         cookie.setMaxAge(maxAge);
         cookie.setPath("/");
         cookie.setDomain(domain);
-        cookie.setHttpOnly(true);
+        cookie.setHttpOnly(false);
         cookie.setSecure(false);
         return cookie;
     }
