@@ -1,19 +1,33 @@
-version: '3.9'
-
 services:
-  db:
+  blog_postgres:
     image: postgres:13
-    container_name: blog_db
+    container_name: blog_postgres
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+      POSTGRES_USER: ${POSTGRES_DB_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_DB_PASSWORD}
       TZ: Asia/Seoul
     volumes:
-      - ./db_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     command: ["postgres", "-c", "client_encoding=UTF8"]
+    networks:
+      - blog_network
+
+  blog_redis:
+    image: redis:7.0.5
+    container_name: blog_redis
+    ports:
+      - "6379:6379"
+    environment:
+      - "REDIS_PASSWORD=${REDIS_PASSWORD}"
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
+    networks:
+      - blog_network
 
 volumes:
-  db_data:
+  postgres_data:
+
+networks:
+  blog_network:
