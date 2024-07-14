@@ -22,6 +22,7 @@ public class RedisConfig {
     public RedisConnectionFactory redisConnectionFactory() {
         // 공식문서 https://docs.spring.io/spring-data/redis/docs/current/api/org/springframework/data/redis/connection/RedisStandaloneConfiguration.html
         RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
+        System.out.println("redisConfig = " + redisConfig);
         redisConfig.setHostName(redisProperties.getHost());
         redisConfig.setPort(redisProperties.getPort());
         redisConfig.setPassword(redisProperties.getPassword());

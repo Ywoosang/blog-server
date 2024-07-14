@@ -46,11 +46,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                             .profileImage(oAuth2Attributes.getProfileImage())
                             .role(MemberRole.USER)
                             .build();
-
                     log.info("사용자 가입 이메일: {}", newMember.getEmail());
                     return memberRepository.save(newMember);
                 });
-        log.info("사용자 로그인 이메일: {}", member.getEmail());
+        log.info("사용자 로그인 이메일: {} 사용자 로그인 아이디: {}", member.getEmail(), member.getMemberId());
         OAuth2UserDTO oauth2UserDTO = OAuth2UserDTO.from(member);
 
         // SecurityContext 에 저장

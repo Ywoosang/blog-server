@@ -14,13 +14,20 @@ jobs:
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:13
         ports:
           - 5432:5432
         env:
           POSTGRES_DB: ${{ secrets.PG_DB_NAME }}
           POSTGRES_USER: ${{ secrets.PG_DB_USERNAME }}
           POSTGRES_PASSWORD: ${{ secrets.PG_DB_PASSWORD }}
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        env:
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
 
     steps:
       - name: 리포지토리 checkout

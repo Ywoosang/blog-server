@@ -95,8 +95,10 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .addFilterAfter(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth
-                        // 관리자 권한이 필요
+                        // 관리자 권한이 필요힌 경로
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                        // access 토큰 재발급
+                        .requestMatchers("/api/v1/auth/token/reissue").permitAll()
                         // 이외 요청 모두 jwt 필터를 타도록 설정 -> 로그인하지 않았어도 GUEST 로 Context 저장
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session

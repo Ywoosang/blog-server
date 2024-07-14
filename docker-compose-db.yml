@@ -16,7 +16,7 @@ services:
       - blog_network
 
   blog_redis:
-    image: redis:7.0.5
+    image: redis:7
     container_name: blog_redis
     ports:
       - "6379:6379"

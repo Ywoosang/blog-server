@@ -4,7 +4,6 @@ import com.ywoosang.tech.enums.MemberRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -20,11 +19,7 @@ public class CustomOAuth2User implements OAuth2User {
 
     @Override
     public Map<String, Object> getAttributes() {
-        return Map.of(
-                "email", oauth2UserDTO.getEmail(),
-                "nickname", oauth2UserDTO.getNickname(),
-                "profileImage", oauth2UserDTO.getProfileImage()
-        );
+        return Map.of("userId", oauth2UserDTO.getMemberId(), "email", oauth2UserDTO.getEmail(), "nickname", oauth2UserDTO.getNickname(), "profileImage", oauth2UserDTO.getProfileImage());
     }
 
     @Override
@@ -40,6 +35,10 @@ public class CustomOAuth2User implements OAuth2User {
     }
 
     // getAttribute 로 가져올 수 있지만 명시적으로 가져오기 위해 추가
+    public Long getMemberId() {
+        return oauth2UserDTO.getMemberId();
+    }
+
     public MemberRole getRole() {
         return oauth2UserDTO.getRole();
     }
