@@ -5,7 +5,6 @@ import com.ywoosang.tech.domain.auth.service.AuthService;
 import com.ywoosang.tech.response.ResponseFactory;
 import com.ywoosang.tech.response.SuccessResponse;
 import lombok.RequiredArgsConstructor;
-import org.antlr.v4.runtime.Token;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

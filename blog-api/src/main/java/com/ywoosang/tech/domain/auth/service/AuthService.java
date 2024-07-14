@@ -17,15 +17,13 @@ public class AuthService {
 
     public TokenResponse reissueToken(String refreshToken) {
         log.info("refreshToken 을 이용해 accessToken 재발급: {}", refreshToken);
-
         // refresh 토큰 만료여부 검사
         if (jwtService.isRefreshTokenExpired(refreshToken)) {
             log.info("refreshToken 만료: {}", refreshToken);
             throw new CustomException(AuthErrorCode.TOKEN_EXPIRED);
         }
         Long memberId = jwtService.getMemberIdFromRefreshToken(refreshToken);
-        String redisKey = redisService.generateRefreshTokenKey(memberId);
-        String redisRefreshToken = redisService.getValue(redisKey);
+        String redisRefreshToken = redisService.getRefreshToken(memberId);
         // 유효한 jwt 토큰이라면, 사용자의 refreshToken 과 대조한다.
         if (redisRefreshToken == null || !redisRefreshToken.equals(refreshToken)) {
             log.warn("사용자의 refreshToken 이 아님: {}", refreshToken);
