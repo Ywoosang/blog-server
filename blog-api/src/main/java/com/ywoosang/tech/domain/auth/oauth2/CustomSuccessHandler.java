@@ -29,11 +29,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         CustomOAuth2User customUserDetails = (CustomOAuth2User) authentication.getPrincipal();
-        String email = customUserDetails.getName();
-        MemberRole role = customUserDetails.getRole();
+        String email = customUserDetails.getEmail();
         // jwt 생성
-        String accessToken = jwtService.createAccessToken(email, role);
-        // String refreshToken = jwtService.createRefreshToken(email);
+        String accessToken = jwtService.createAccessToken(email);
+        String refreshToken = jwtService.createRefreshToken(email);
+
         response.addCookie(cookieUtil.createAccessTokenCookie(accessToken));
         response.sendRedirect(authRedirectUrl);
     }

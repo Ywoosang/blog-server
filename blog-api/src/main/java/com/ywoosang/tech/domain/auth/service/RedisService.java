@@ -14,7 +14,7 @@ import java.time.Duration;
 public class RedisService {
     private final StringRedisTemplate redisTemplate;
 
-    public void setValue(String key, String value, Long expiresIn) {
+    public void setValue(String key, String value, int expiresIn) {
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
         valueOps.set(key, value, Duration.ofSeconds(expiresIn));
     }
