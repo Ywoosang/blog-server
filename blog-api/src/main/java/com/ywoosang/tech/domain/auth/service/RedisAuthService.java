@@ -13,17 +13,20 @@ import java.time.Duration;
 public class RedisAuthService {
     private final StringRedisTemplate redisTemplate;
 
-    public void setValue(String key, String value, int expiresIn) {
+    public void setRefreshToken(Long memberId , String value, int expiresIn) {
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
+        String key = generateRefreshTokenKey(memberId);
         valueOps.set(key, value, Duration.ofSeconds(expiresIn));
     }
 
-    public String getValue(String key) {
+    public String getRefreshToken(Long memberId) {
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
+        String key = generateRefreshTokenKey(memberId);
         return valueOps.get(key);
     }
 
-    public void deleteValue(String key) {
+    public void deleteValue(Long memberId) {
+        String key = generateRefreshTokenKey(memberId);
         redisTemplate.delete(key);
     }
 

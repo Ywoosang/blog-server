@@ -68,8 +68,7 @@ public class JwtService {
 
     public String createRefreshToken(Long memberId) {
         String refreshToken = createToken(memberId, refreshTokenExpiresIn, refreshTokenSecretKey);
-        String key = redisService.generateRefreshTokenKey(memberId);
-        redisService.setValue(key, refreshToken, refreshTokenExpiresIn);
+        redisService.setRefreshToken(memberId, refreshToken, refreshTokenExpiresIn);
         return refreshToken;
     }
 
