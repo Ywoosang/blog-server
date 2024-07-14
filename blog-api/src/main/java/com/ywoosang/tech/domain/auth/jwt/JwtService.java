@@ -1,10 +1,9 @@
 package com.ywoosang.tech.domain.auth.jwt;
 
 import com.ywoosang.tech.code.AuthErrorCode;
-import com.ywoosang.tech.domain.auth.service.RedisService;
+import com.ywoosang.tech.domain.auth.service.RedisAuthService;
 import com.ywoosang.tech.domains.member.entity.Member;
 import com.ywoosang.tech.domains.member.repository.MemberRepository;
-import com.ywoosang.tech.enums.MemberRole;
 import com.ywoosang.tech.exception.CustomException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -19,14 +18,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class JwtService {
-    private final RedisService redisService;
+    private final RedisAuthService redisService;
     MemberRepository memberRepository;
 
     @Value("${jwt.access.secret}")
@@ -49,39 +47,28 @@ public class JwtService {
 
     @PostConstruct
     public void initialize() {
-        System.out.println("accessTokenSecret = " + accessTokenSecret);
-        System.out.println("refreshTokenSecret = " + refreshTokenSecret);
-
         accessTokenSecretKey = Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(accessTokenSecret));
         refreshTokenSecretKey = Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(refreshTokenSecret));
     }
 
+
+    // Authorization 헤더로부터 토큰을 가져온다.
     public String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
+        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)){
             return bearerToken.substring(BEARER_PREFIX.length());
         }
+        // 에러 처리 추가 요망
         return null;
     }
 
-    public String createAccessToken(String email) {
-        return Jwts.builder()
-                .claim("email", email)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + accessTokenExpiresIn))
-                .signWith(accessTokenSecretKey, Jwts.SIG.HS256)
-                .compact();
+    public String createAccessToken(Long memberId) {
+        return createToken(memberId, accessTokenExpiresIn, accessTokenSecretKey);
     }
 
-    public String createRefreshToken(String email) {
-        String refreshToken = Jwts.builder()
-                .claim("email", email)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + refreshTokenExpiresIn))
-                .signWith(refreshTokenSecretKey, Jwts.SIG.HS256)
-                .compact();
-
-        String key = "refresh:" + email;
+    public String createRefreshToken(Long memberId) {
+        String refreshToken = createToken(memberId, refreshTokenExpiresIn, refreshTokenSecretKey);
+        String key = redisService.generateRefreshTokenKey(memberId);
         redisService.setValue(key, refreshToken, refreshTokenExpiresIn);
         return refreshToken;
     }
@@ -93,6 +80,29 @@ public class JwtService {
     public boolean isRefreshTokenExpired(String refreshToken) throws CustomException {
         return isTokenExpired(refreshToken, refreshTokenSecretKey);
     }
+
+    // 토큰에서 memberId 를 추출해 사용자를 가져온다.
+    public Member getMemberFromAccessToken(String token) {
+        Long memberId = getMemberIdFromAccessToken(token);
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new CustomException(AuthErrorCode.AUTHENTICATION_FAILED));
+    }
+
+    // 토큰의 만료여부 검사 후 만료되지 않았다면 호출할 것
+    public Long getMemberIdFromAccessToken(String token) {
+        return Jwts.parser().verifyWith(accessTokenSecretKey).build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("memberId",Long.class);
+    }
+
+    public Long getMemberIdFromRefreshToken(String token) {
+        return Jwts.parser().verifyWith(refreshTokenSecretKey).build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("memberId",Long.class);
+    }
+
 
     // 토큰 만료여부 검사
     private boolean isTokenExpired(String token, SecretKey secretKey) {
@@ -118,24 +128,14 @@ public class JwtService {
         }
     }
 
-    public Member getMemberFromAccessToken(String token) {
-        String email = getEmailFromAccessToken(token);
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new CustomException(AuthErrorCode.AUTHENTICATION_FAILED));
+    private String createToken(Long memberId, int expiresIn, SecretKey secretKey) {
+        return Jwts.builder()
+                .claim("memberId", memberId)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expiresIn))
+                .signWith(secretKey, Jwts.SIG.HS256)
+                .compact();
     }
 
-    // 토큰의 만료여부 검사 후 만료되지 않았다면 호출할 것
-    public String getEmailFromAccessToken(String token) {
-        return Jwts.parser().verifyWith(accessTokenSecretKey).build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .get("email",String.class);
-    }
 
-    public String getEmailFromRefreshToken(String token) {
-        return Jwts.parser().verifyWith(refreshTokenSecretKey).build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .get("email",String.class);
-    }
 }

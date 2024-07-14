@@ -19,27 +19,6 @@ public class CookieUtil {
     @Value("${cookie.refresh-name}")
     private String refreshTokenName;
 
-    // 로그인 직후 로컬스토리지로 이동시키기 때문에 만료시간을 짧게 설정
-    public Cookie createTokenCookie(String cookieName, String token) {
-        Cookie cookie = new Cookie(cookieName, token);
-        cookie.setMaxAge(maxAge);
-        cookie.setPath("/");
-        cookie.setDomain(domain);
-        cookie.setHttpOnly(false);
-        cookie.setSecure(false);
-        return cookie;
-    }
-
-    public void clearTokenCookie(String cookieName, HttpServletResponse response) {
-        Cookie cookie = new Cookie(cookieName, null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        cookie.setDomain(domain);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(false);
-        response.addCookie(cookie);
-    }
-
     public Cookie createAccessTokenCookie(String token) {
         return createTokenCookie(accessTokenName, token);
     }
@@ -52,4 +31,26 @@ public class CookieUtil {
         clearTokenCookie(accessTokenName, response);
         clearTokenCookie(refreshTokenName, response);
     }
+
+    // 로그인 직후 로컬스토리지로 이동시키기 때문에 만료시간을 짧게 설정
+    private Cookie createTokenCookie(String cookieName, String token) {
+        Cookie cookie = new Cookie(cookieName, token);
+        cookie.setMaxAge(maxAge);
+        cookie.setPath("/");
+        cookie.setDomain(domain);
+        cookie.setHttpOnly(false);
+        cookie.setSecure(false);
+        return cookie;
+    }
+
+    private void clearTokenCookie(String cookieName, HttpServletResponse response) {
+        Cookie cookie = new Cookie(cookieName, null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        cookie.setDomain(domain);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        response.addCookie(cookie);
+    }
+
 }

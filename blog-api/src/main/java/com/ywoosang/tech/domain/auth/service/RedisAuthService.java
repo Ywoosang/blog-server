@@ -4,14 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
-
 import java.time.Duration;
 
 // 공식문서 StringRedisTemplate
 // https://docs.spring.io/spring-data/redis/docs/current/api/org/springframework/data/redis/core/StringRedisTemplate.html
 @Component
 @RequiredArgsConstructor
-public class RedisService {
+public class RedisAuthService {
     private final StringRedisTemplate redisTemplate;
 
     public void setValue(String key, String value, int expiresIn) {
@@ -23,7 +22,13 @@ public class RedisService {
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
         return valueOps.get(key);
     }
+
     public void deleteValue(String key) {
         redisTemplate.delete(key);
+    }
+
+    // refreshToken 을 저장할 key 생성
+    public String generateRefreshTokenKey(Long memberId) {
+        return "auth:refresh:" + memberId;
     }
 }
